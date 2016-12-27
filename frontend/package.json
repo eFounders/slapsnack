@@ -1,0 +1,29 @@
+{
+  "name": "slapsnack-frontend",
+  "version": "0.0.1",
+  "description": "SlapSnack",
+  "author": "eFounders",
+  "license": "MIT",
+  "scripts": {
+    "lint": "eslint .;exit 0",
+    "dev": "next",
+    "build": "next build",
+    "start": "next start",
+    "redeploy": "now --docker --alias slapsnack.com"
+  },
+  "dependencies": {
+    "lodash": "^4.17.3",
+    "next": "^1.2.3",
+    "react": "^15.4.1",
+    "uploadcare-widget": "^2.10.2",
+    "whatwg-fetch": "^2.0.1"
+  },
+  "devDependencies": {
+    "babel-eslint": "^7.1.1",
+    "eslint": "^3.12.2",
+    "eslint-config-airbnb": "^13.0.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^2.2.3",
+    "eslint-plugin-react": "^6.8.0"
+  }
+}

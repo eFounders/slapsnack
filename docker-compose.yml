@@ -1,0 +1,27 @@
+version: '2'
+services:
+  database:
+    container_name: slapsnack_database
+    image: mongo:3.0.14
+    ports:
+      - 27017:27017
+  backend:
+    container_name: slapsnack_backend
+    depends_on:
+      - database
+    build: ./backend
+    volumes:
+      - ./backend:/opt/app
+    entrypoint: ["yarn", "run", "dev"]
+    ports:
+      - 8080:8080
+  frontend:
+    container_name: slapsnack_frontend
+    build: ./frontend
+    volumes:
+      - ./frontend:/opt/app
+    environment:
+      SHELL: /bin/bash
+    entrypoint: ["yarn", "run", "dev"]
+    ports:
+      - 3000:3000
