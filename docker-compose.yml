@@ -1,4 +1,4 @@
-version: '2'
+version: '3.1'
 services:
   database:
     container_name: slapsnack_database
@@ -12,7 +12,7 @@ services:
     build: ./backend
     volumes:
       - ./backend:/opt/app
-    entrypoint: ["yarn", "run", "dev"]
+    entrypoint: ["yarn", "dev"]
     ports:
       - 8080:8080
   frontend:
@@ -22,6 +22,6 @@ services:
       - ./frontend:/opt/app
     environment:
       SHELL: /bin/bash
-    entrypoint: ["yarn", "run", "dev"]
+    entrypoint: ["yarn", "dev"]
     ports:
       - 3000:3000

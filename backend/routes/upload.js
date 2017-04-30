@@ -1,10 +1,11 @@
 const request = require('request-promise');
 //
+const Snap = require('../models/snap');
 const { color, sendActions } = require('../lib/constants');
-const { Snap } = require('../lib/db');
 const analytics = require('../lib/analytics');
 
-module.exports = async ({ snapId, cdnUrl }) => {
+module.exports = async (req, res) => {
+  const { snapId, cdnUrl } = req.body;
   const { message, responseUrl, teamId } = await Snap.findById(snapId);
   const text = 'Your media has been attached!';
   request.post({
@@ -32,5 +33,5 @@ module.exports = async ({ snapId, cdnUrl }) => {
       imageUrl: cdnUrl,
     },
   });
-  return { ok: true };
+  res.json({ ok: true });
 };

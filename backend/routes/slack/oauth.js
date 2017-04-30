@@ -1,7 +1,6 @@
-const { send } = require('micro');
 const { WebClient } = require('@slack/client');
 //
-const { Team } = require('../../lib/db');
+const Team = require('../../models/team');
 const analytics = require('../../lib/analytics');
 
 const {
@@ -10,14 +9,10 @@ const {
   FRONTEND_URL: frontendUrl,
 } = process.env;
 
-const redirect = (res, url) => {
-  res.setHeader('Location', url);
-  send(res, 302);
-};
-
-module.exports = async ({ code }, res) => {
+module.exports = async (req, res) => {
+  const { code } = req.query;
   if (!code) {
-    return redirect(res, frontendUrl);
+    return res.redirect(frontendUrl);
   }
   const {
     user_id: userId,
@@ -42,5 +37,9 @@ module.exports = async ({ code }, res) => {
       properties: { teamName },
     });
   }
-  return redirect(res, frontendUrl);
+  const web = new WebClient(bot.bot_access_token);
+  const message = 'SlapSnack has been installed on your team!\n' +
+    'Try `/slapsnack @user hey!` to send your first snap and tell your colleagues about it :tada:';
+  web.chat.postMessage(userId, message, { as_user: true });
+  return res.redirect(frontendUrl);
 };

@@ -1,12 +1,10 @@
 import { stringify } from 'querystring';
-
-// TODO we need next.js custom webpack config to make it work!
-const isDevelopment = false;// process.env.NODE_ENV === 'development';
-const clientId = isDevelopment ? '2327798584.93954971440' : '2327798584.76826552325';
+//
+import { SLACK_CLIENT_ID } from '../../lib/env';
 
 const queryString = stringify({
   scope: 'commands,bot,users:read,channels:read,chat:write:bot',
-  client_id: clientId,
+  client_id: SLACK_CLIENT_ID,
 });
 const srcSet = {
   '1x': 'https://platform.slack-edge.com/img/add_to_slack.png',

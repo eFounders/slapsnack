@@ -6,26 +6,25 @@
   "scripts": {
     "lint": "eslint .;exit 0",
     "lt": "lt -p 8080 -s slapsnack",
-    "dev": "NODE_ENV='development' nodemon --exec micro -p 8080",
-    "start": "micro -p 8080",
-    "redeploy": "now --docker --alias backend.slapsnack.com -e NODE_ENV='production' -e MONGO_URL='mongodb://slapsnack:magWerwad5@cockney.5.mongolayer.com:10075,cockney.4.mongolayer.com:10075/slapsnack?replicaSet=set-5683edfafc1d2cedfa000953' -e SLACK_CLIENT_ID='2327798584.76826552325' -e SLACK_CLIENT_SECRET='dfbac86a09bfed67d82a26a673c94cc4' -e SLACK_VERIFICATION_TOKEN='fGb2zkEZwoqHxG0w9dZCZ154' -e SEGMENT_WRITE_KEY='GjspXuxGokKIQiTi8lH9Pz5anbcrcNTu' -e FRONTEND_URL='https://slapsnack.com'",
-    "redeploy2": "now --docker --alias backend.slapsnack.com -e NODE_ENV='production' -e MONGO_URL=@slapsnack-MONGO_URL -e SLACK_CLIENT_ID=@slapsnack-SLACK_CLIENT_ID -e SLACK_CLIENT_SECRET=@slapsnack-SLACK_CLIENT_SECRET -e SLACK_VERIFICATION_TOKEN=@slapsnack-SLACK_VERIFICATION_TOKEN -e SEGMENT_WRITE_KEY=@slapsnack-SEGMENT_WRITE_KEY -e FRONTEND_URL='https://slapsnack.com'"
+    "dev": "NODE_ENV='development' nodemon",
+    "start": "node .",
+    "deploy": "now --npm -E .env/production.env && now alias"
   },
   "dependencies": {
-    "@slack/client": "^3.8.1",
-    "analytics-node": "^2.1.0",
-    "dotenv": "^2.0.0",
-    "lodash": "^4.17.3",
-    "micro": "^6.1.0",
-    "mongoose": "^4.7.5",
-    "request": "^2.79.0",
-    "request-promise": "^4.1.1",
-    "uniloc": "^0.3.0",
-    "urlencoded-body-parser": "^1.0.1"
+    "@slack/client": "^3.9.0",
+    "analytics-node": "^2.4.0",
+    "body-parser": "^1.17.1",
+    "cors": "^2.8.3",
+    "dotenv": "^4.0.0",
+    "express": "^4.15.2",
+    "lodash": "^4.17.4",
+    "mongoose": "^4.9.6",
+    "request": "^2.81.0",
+    "request-promise": "^4.2.0"
   },
   "devDependencies": {
-    "eslint": "^3.12.2",
-    "eslint-config-airbnb-base": "^11.0.0",
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb-base": "^11.1.3",
     "eslint-plugin-import": "^2.2.0",
     "localtunnel": "^1.8.2",
     "nodemon": "^1.11.0"

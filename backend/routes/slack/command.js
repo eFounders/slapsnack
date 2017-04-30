@@ -6,7 +6,8 @@ const request = require('request-promise');
 const { WebClient } = require('@slack/client');
 //
 const { color, sendActions } = require('../../lib/constants');
-const { Team, Snap } = require('../../lib/db');
+const Team = require('../../models/team');
+const Snap = require('../../models/snap');
 const analytics = require('../../lib/analytics');
 
 const { SLACK_VERIFICATION_TOKEN: verificationToken } = process.env;
@@ -52,33 +53,33 @@ const recipientsToMemberIds = async (web, recipients, userId) => {
   return uniq(flatten(results));
 };
 
-module.exports = async (params) => {
-  const { token, team_id: teamId, user_id: userId, response_url: responseUrl, text } = params;
+module.exports = async (req, res) => {
+  const { token, team_id: teamId, user_id: userId, response_url: responseUrl, text } = req.body;
   if (token !== verificationToken) {
-    return 'Wrong verification token';
+    return res.send('Wrong verification token');
   }
   if (!teamId) {
-    return 'Wrong team ID';
+    return res.send('Wrong team ID');
   }
   const { bot } = await Team.findOne({ teamId });
-  const web = new WebClient(bot.bot_access_token, { logLevel: 'debug' });
+  const web = new WebClient(bot.bot_access_token);
   // console.log('bot', bot);
   const words = text.split(' ').filter(word => word);
   if (words.length && words[0] === 'help') {
-    return [
+    return res.send([
       'Use `/slapsnack recipients [message]` to send ephemeral messages to your teammates.',
       'recipients can be any combination of users and public channels separated by spaces.',
       '• `/slapsnack @alice It\'s a secret to everybody!`',
       '• `/slapsnack #general Am I really sure about this one?`',
       '• `/slapsnack @bob @charlie #random Hi there!`',
-    ].join('\n');
+    ].join('\n'));
   }
   const isNotRecipient = word => !['@', '#'].includes(word.charAt(0));
   const findResult = findIndex(words, isNotRecipient);
   const index = findResult === -1 ? words.length : findResult;
   const recipients = uniq(words.slice(0, index));
   if (recipients.length === 0) {
-    return 'You must specify at least one recipient! (see `/slapsnack help`)';
+    return res.send('You must specify at least one recipient! (see `/slapsnack help`)');
   }
   const message = words.slice(index).join(' ');
   //
@@ -106,7 +107,7 @@ module.exports = async (params) => {
     event: 'create',
     properties: { snapId, recipients, message },
   });
-  return {
+  return res.json({
     text: message,
     attachments: [{
       callback_id: snapId,
@@ -118,5 +119,5 @@ module.exports = async (params) => {
         value: 'media',
       }]),
     }],
-  };
+  });
 };

@@ -1,10 +1,8 @@
-FROM node:7.3.0-alpine
+FROM node:7.9.0-alpine
 MAINTAINER SlapSnack <slapsnack@e-founders.com>
 LABEL name="slapsnack-backend"
 
 WORKDIR /opt/app
-
-RUN npm i -g yarn
 
 # Install packages using yarn
 COPY package.json yarn.lock /tmp/

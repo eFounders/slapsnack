@@ -2,8 +2,8 @@ const { stringify } = require('querystring');
 const request = require('request-promise');
 const { WebClient } = require('@slack/client');
 //
+const Snap = require('../../models/snap');
 const { color } = require('../../lib/constants');
-const { Snap } = require('../../lib/db');
 const analytics = require('../../lib/analytics');
 
 const { SLACK_VERIFICATION_TOKEN: verificationToken, FRONTEND_URL: frontendUrl } = process.env;
@@ -40,7 +40,7 @@ const handleSendEvent = async (snapId, delay, user, responseUrl) => {
   if (!memberIds.length) {
     return { text: 'Wrong recipient! (see `/slapsnack help`)' };
   }
-  const web = new WebClient(bot.bot_access_token, { logLevel: 'debug' });
+  const web = new WebClient(bot.bot_access_token);
   const text = `Hey, ${user.name} just sent you a SlapSnack!`;
   memberIds.forEach((memberId) => {
     web.chat.postMessage(memberId, '', {
@@ -114,9 +114,10 @@ const handleReadEvent = async (snapId, user, responseUrl) => {
   };
 };
 
-module.exports = ({ ssl_check: sslCheck, payload }) => {
+module.exports = async (req, res) => {
+  const { ssl_check: sslCheck, payload } = req.body;
   if (sslCheck) {
-    return 'ssl_check';
+    return res.send('ssl_check');
   }
   const {
     token,
@@ -126,21 +127,21 @@ module.exports = ({ ssl_check: sslCheck, payload }) => {
     actions,
   } = JSON.parse(payload);
   if (token !== verificationToken) {
-    return 'Wrong verification token';
+    return res.send('Wrong verification token');
   }
   const [{ name: event, value: delay }] = actions;
   switch (event) {
     case 'media': {
-      return handleMediaEvent(snapId, responseUrl);
+      return res.json(await handleMediaEvent(snapId, responseUrl));
     }
     case 'send': {
-      return handleSendEvent(snapId, parseInt(delay, 10), user, responseUrl);
+      return res.json(await handleSendEvent(snapId, parseInt(delay, 10), user, responseUrl));
     }
     case 'read': {
-      return handleReadEvent(snapId, user, responseUrl);
+      return res.json(await handleReadEvent(snapId, user, responseUrl));
     }
     default: {
-      return 'POST /slack/im Unknown event';
+      return res.json({ error: 'POST /slack/im Unknown event' });
     }
   }
 };

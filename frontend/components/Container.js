@@ -1,41 +1,43 @@
-import { PropTypes } from 'react';
-import css, { media } from 'next/css';
-import Footer from './Footer';
+import PropTypes from 'prop-types';
+import Footer from './footer';
 
-const container = css({
-  position: 'relative',
-  minHeight: '100vh',
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'space-between',
-  backgroundColor: '#3c444c',
-  zIndex: 1,
-  paddingBottom: 120,
-  ':before': {
-    content: '""',
-    position: 'absolute',
-    backgroundImage: 'url("/static/img/background.jpg")',
-    backgroundSize: 'cover',
-    opacity: 0.1,
-    zIndex: -1,
-    width: '100%',
-    height: '100%',
-  },
-}, media('(max-width: 1200px)', {
-  ':before': {
-    backgroundPosition: '46%',
-  },
-}));
-
-const Container = ({ className, children }) => (
-  <div className={css(container, className)}>
+const Container = ({ style, children }) => (
+  <div style={style}>
     {children}
     <Footer />
+    <style jsx>{`
+      div {
+        position: relative;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        background-color: #3c444c;
+        z-index: 1;
+        padding-bottom: 120px;
+      }
+      div:before {
+        content: '';
+        position: absolute;
+        background-image: url(/static/img/background.jpg);
+        background-size: cover;
+        opacity: 0.1;
+        z-index: -1;
+        width: 100%;
+        height: 100%;
+      }
+      @media (max-width: 1200px) {
+        div:before {
+          background-position: 46%;
+        }
+      }
+    `}</style>
   </div>
 );
 Container.propTypes = {
-  className: PropTypes.shape(),
+  style: PropTypes.shape(),
   children: PropTypes.node.isRequired,
 };
+Container.defaultProps = { style: {} };
 
 export default Container;

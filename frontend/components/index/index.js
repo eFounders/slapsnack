@@ -1,50 +1,7 @@
-import css, { media } from 'next/css';
-import Container from '../Container';
-import Notification from './Notification';
-import AddToSlackButton from './AddToSlackButton';
-import Thumbnail from './Thumbnail';
-
-const item = css({ margin: '30px 0' });
-
-const logo = css({
-  width: 80,
-  height: 80,
-  margin: '0 auto',
-  paddingTop: 40,
-});
-
-const title = css({
-  fontSize: 58,
-  fontWeight: 'bold',
-  color: '#f2f2f2',
-  textAlign: 'center',
-  marginBottom: 16,
-});
-
-const description = css({
-  fontSize: 20,
-  color: '#b0bcc8',
-  textAlign: 'center',
-  lineHeight: '34px',
-});
-
-const addToSlackButton = css({
-  backgroundColor: 'rgba(29, 31, 33, 0.25)',
-  padding: 20,
-  margin: '0 auto',
-  borderRadius: 10,
-  marginTop: 40,
-});
-
-const thumbnails = css({
-  display: 'flex',
-  justifyContent: 'space-between',
-  width: '70%',
-  margin: '0 auto',
-}, media('(max-width: 1200px)', {
-  flexDirection: 'column',
-  alignItems: 'center',
-}));
+import Container from '../container';
+import Notification from './notification';
+import AddToSlackButton from './add-to-slack-button';
+import Thumbnail from './thumbnail';
 
 export default () => (
   <Container>
@@ -69,26 +26,26 @@ export default () => (
       message="Haha, just kidding Don! 🤓"
       delay={13}
     />
-    <img className={css(item, logo)} src="/static/img/logo-header.svg" role="presentation" />
-    <div className={item}>
-      <h1 className={css(title, { marginTop: 10 })}>Send snaps in Slack 👻</h1>
-      <p className={description}>
+    <img className="item logo" src="/static/img/logo-header.svg" alt="logo" />
+    <div className="item">
+      <h1 className="title title-top">Send snaps in Slack 👻</h1>
+      <p className="description">
         Spice up your team’s life & go
-        <span className={css({ margin: '0 8px' })}>😂</span>
+        <span className="description-emoji">😂</span>
         <span>by sending disappearing messages in Slack with the </span>
-        <strong className={css({ color: '#f2f2f2' })}>/slapsnack</strong>
+        <strong className="description-command">/slapsnack</strong>
         <span> command.</span>
       </p>
     </div>
-    <div className={css(item, addToSlackButton)}>
+    <div className="item add-to-slack-button">
       <AddToSlackButton />
     </div>
-    <div className={item}>
-      <h1 className={title}>F**k Productivity! ✊</h1>
-      <p className={description}>Life is more fun when you live in the moment 😎</p>
+    <div className="item">
+      <h1 className="title">F**k Productivity! ✊</h1>
+      <p className="description">Life is more fun when you live in the moment 😎</p>
     </div>
-    <div className={item}>
-      <div className={thumbnails}>
+    <div className="item">
+      <div className="thumbnails">
         <Thumbnail src="/static/img/gif1.mp4">
           Just use <strong>/slapsnack</strong> to send useless messages,
           pictures and gifs to your teammates.
@@ -104,5 +61,57 @@ export default () => (
         </Thumbnail>
       </div>
     </div>
+    <style jsx>{`
+      .item {
+        margin: 30px 0;
+      }
+      .logo {
+        width: 80px;
+        height: 80px;
+        margin: 0 auto;
+        padding-top: 40px;
+      }
+      .title {
+        font-size: 58px;
+        font-weight: bold;
+        color: #f2f2f2;
+        text-align: center;
+        margin-bottom: 16px;
+      }
+      .title-top {
+        margin-top: 10px;
+      }
+      .description {
+        font-size: 20px;
+        color: #b0bcc8;
+        text-align: center;
+        line-height: 34px;
+      }
+      .description-emoji {
+        margin: 0 8px;
+      }
+      .description-command {
+        color: #f2f2f2;
+      }
+      .add-to-slack-button {
+        background-color: rgba(29, 31, 33, 0.25);
+        padding: 20px;
+        margin: 0 auto;
+        border-radius: 10px;
+        margin-top: 40px;
+      }
+      .thumbnails {
+        display: flex;
+        justify-content: space-between;
+        width: 70%;
+        margin: 0 auto;
+      }
+      @media (max-width: 1200px) {
+        .thumbnails {
+          flex-direction: column;
+          align-items: center;
+        }
+      }
+    `}</style>
   </Container>
 );

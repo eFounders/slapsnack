@@ -1,15 +1,10 @@
 import { Component } from 'react';
+import { Head } from 'next/document';
 import random from 'lodash/random';
-import Head from 'next/head';
-import { insertRule } from 'next/css';
-
-insertRule(`
-html, body {
-  margin: 0;
-  font-family: "Lato", sans-serif;
-  overflow-x: hidden;
-}
-`);
+//
+import { FRONTEND_URL } from '../../lib/env';
+import GlobalStyle from './global-style';
+import UploadcareScript from './uploadcare-script';
 
 const description = [
   'SlapSnack brings the fun of Snapchat to Slack.',
@@ -18,9 +13,7 @@ const description = [
   'Life is more fun when you live in the moment!',
 ].join(' ');
 const title = 'A command for teams who want 👻 in Slack';
-const isDevelopment = false;// process.env.NODE_ENV === 'development';
-const frontendUrl = isDevelopment ? 'http://localhost:3000' : 'https://slapsnack.com';
-const socialUrl = `${frontendUrl}/static/img/social.jpg`;
+const socialUrl = `${FRONTEND_URL}/static/img/social.jpg`;
 
 export default class extends Component {
   state = { title: 'SlapSnack' };
@@ -44,7 +37,7 @@ export default class extends Component {
         <meta httpEquiv="x-ua-compatible" content="ie=edge" />
         {/* Facebook meta */}
         <meta property="fb:app_id" content="1701721073472771" />
-        <meta property="og:url" content={frontendUrl} />
+        <meta property="og:url" content={FRONTEND_URL} />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="SlapSnack.co" />
         <meta property="og:title" content={title} />
@@ -63,6 +56,9 @@ export default class extends Component {
         <link rel="icon" type="image/x-icon" href="/static/img/favicon.png" />
         {/* Lato font */}
         <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" />
+        {/* Global style */}
+        <GlobalStyle />
+        <UploadcareScript />
       </Head>
     );
   }

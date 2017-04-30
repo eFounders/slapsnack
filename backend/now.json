@@ -1,0 +1,8 @@
+{
+  "name": "slapsnack-backend",
+  "type": "npm",
+  "alias": "backend.slapsnack.com",
+  "engines": {
+    "node": "7.9.0"
+  }
+}
