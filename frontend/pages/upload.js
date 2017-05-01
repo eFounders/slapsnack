@@ -10,8 +10,6 @@ export default class extends Component {
     if (!this.props.id) {
       return <Error message="Missing snap ID :(" />;
     }
-    return (
-      <Upload snapId={this.props.id} />
-    );
+    return <Upload snapId={this.props.id} />;
   }
 }

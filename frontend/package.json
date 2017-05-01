@@ -5,7 +5,8 @@
   "author": "eFounders",
   "license": "MIT",
   "scripts": {
-    "lint": "eslint .;exit 0",
+    "eslint": "eslint .;exit 0",
+    "prettier": "prettier --print-width 100 --single-quote --trailing-comma all --write \"{components,lib,pages}/**/*.js\"",
     "dev": "next",
     "build": "next build",
     "start": "next start",
@@ -26,6 +27,7 @@
     "eslint-config-airbnb": "^14.1.0",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^4.0.0",
-    "eslint-plugin-react": "^6.10.3"
+    "eslint-plugin-react": "^6.10.3",
+    "prettier": "^1.2.2"
   }
 }

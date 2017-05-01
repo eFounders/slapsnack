@@ -12,14 +12,16 @@ module.exports = async (req, res) => {
     url: responseUrl,
     json: {
       text: message,
-      attachments: [{
-        fallback: text,
-        text,
-        image_url: cdnUrl,
-        callback_id: snapId,
-        color,
-        actions: sendActions,
-      }],
+      attachments: [
+        {
+          fallback: text,
+          text,
+          image_url: cdnUrl,
+          callback_id: snapId,
+          color,
+          actions: sendActions,
+        },
+      ],
     },
   });
   Snap.findByIdAndUpdate(snapId, {

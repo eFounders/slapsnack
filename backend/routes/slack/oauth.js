@@ -20,9 +20,13 @@ module.exports = async (req, res) => {
     team_name: teamName,
     bot,
   } = await new WebClient().oauth.access(clientId, clientSecret, code);
-  const team = await Team.findOneAndUpdate({ teamId }, {
-    $set: { userId, teamId, teamName, bot },
-  }, { upsert: true });
+  const team = await Team.findOneAndUpdate(
+    { teamId },
+    {
+      $set: { userId, teamId, teamName, bot },
+    },
+    { upsert: true }// eslint-disable-line comma-dangle
+  );
   if (!team) {
     analytics.identify({
       userId: teamId,
@@ -38,7 +42,8 @@ module.exports = async (req, res) => {
     });
   }
   const web = new WebClient(bot.bot_access_token);
-  const message = 'SlapSnack has been installed on your team!\n' +
+  const message =
+    'SlapSnack has been installed on your team!\n' +
     'Try `/slapsnack @user hey!` to send your first snap and tell your colleagues about it :tada:';
   web.chat.postMessage(userId, message, { as_user: true });
   return res.redirect(frontendUrl);

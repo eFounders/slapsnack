@@ -63,16 +63,17 @@ module.exports = async (req, res) => {
   }
   const { bot } = await Team.findOne({ teamId });
   const web = new WebClient(bot.bot_access_token);
-  // console.log('bot', bot);
   const words = text.split(' ').filter(word => word);
   if (words.length && words[0] === 'help') {
-    return res.send([
-      'Use `/slapsnack recipients [message]` to send ephemeral messages to your teammates.',
-      'recipients can be any combination of users and public channels separated by spaces.',
-      '• `/slapsnack @alice It\'s a secret to everybody!`',
-      '• `/slapsnack #general Am I really sure about this one?`',
-      '• `/slapsnack @bob @charlie #random Hi there!`',
-    ].join('\n'));
+    return res.send(
+      [
+        'Use `/slapsnack recipients [message]` to send ephemeral messages to your teammates.',
+        'recipients can be any combination of users and public channels separated by spaces.',
+        "• `/slapsnack @alice It's a secret to everybody!`",
+        '• `/slapsnack #general Am I really sure about this one?`',
+        '• `/slapsnack @bob @charlie #random Hi there!`',
+      ].join('\n')// eslint-disable-line comma-dangle
+    );
   }
   const isNotRecipient = word => !['@', '#'].includes(word.charAt(0));
   const findResult = findIndex(words, isNotRecipient);
@@ -91,16 +92,17 @@ module.exports = async (req, res) => {
     bot,
   });
   const { _id: snapId } = await snap.save();
-  // console.log('snapId', snapId);
-  recipientsToMemberIds(web, recipients, userId).then(memberIds => (
-    Snap.findByIdAndUpdate(snapId, {
-      $set: { memberIds },
-    })
-  )).catch((error) => {
-    request.post(responseUrl, {
-      json: { text: error.message },
+  recipientsToMemberIds(web, recipients, userId)
+    .then(memberIds =>
+      Snap.findByIdAndUpdate(snapId, {
+        $set: { memberIds },
+      })// eslint-disable-line comma-dangle
+    )
+    .catch((error) => {
+      request.post(responseUrl, {
+        json: { text: error.message },
+      });
     });
-  });
   //
   analytics.track({
     userId: teamId,
@@ -109,15 +111,19 @@ module.exports = async (req, res) => {
   });
   return res.json({
     text: message,
-    attachments: [{
-      callback_id: snapId,
-      color,
-      actions: sendActions.concat([{
-        name: 'media',
-        text: 'Add media',
-        type: 'button',
-        value: 'media',
-      }]),
-    }],
+    attachments: [
+      {
+        callback_id: snapId,
+        color,
+        actions: sendActions.concat([
+          {
+            name: 'media',
+            text: 'Add media',
+            type: 'button',
+            value: 'media',
+          },
+        ]),
+      },
+    ],
   });
 };

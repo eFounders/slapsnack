@@ -1,6 +1,6 @@
 /* eslint-disable react/no-danger */
 
-const globalStyle = `
+const style = `
   html, body {
     margin: 0;
     font-family: Lato, sans-serif;
@@ -11,6 +11,4 @@ const globalStyle = `
   }
 `;
 
-export default () => (
-  <style dangerouslySetInnerHTML={{ __html: globalStyle }} />
-);
+export default () => <style dangerouslySetInnerHTML={{ __html: style }} />;

@@ -22,12 +22,14 @@ const handleMediaEvent = async (snapId, responseUrl) => {
   const text = `Follow this link to add a media:\n${url}`;
   return {
     text: message,
-    attachments: [{
-      fallback: text,
-      text,
-      callback_id: snapId,
-      color,
-    }],
+    attachments: [
+      {
+        fallback: text,
+        text,
+        callback_id: snapId,
+        color,
+      },
+    ],
   };
 };
 
@@ -45,18 +47,22 @@ const handleSendEvent = async (snapId, delay, user, responseUrl) => {
   memberIds.forEach((memberId) => {
     web.chat.postMessage(memberId, '', {
       as_user: true,
-      attachments: [{
-        fallback: text,
-        text,
-        callback_id: snapId,
-        color,
-        actions: [{
-          name: 'read',
-          text: 'Take a look?',
-          type: 'button',
-          value: 'read',
-        }],
-      }],
+      attachments: [
+        {
+          fallback: text,
+          text,
+          callback_id: snapId,
+          color,
+          actions: [
+            {
+              name: 'read',
+              text: 'Take a look?',
+              type: 'button',
+              value: 'read',
+            },
+          ],
+        },
+      ],
     });
   });
   analytics.track({
@@ -81,16 +87,18 @@ const handleReadEvent = async (snapId, user, responseUrl) => {
   const usernames = seenBy.join(', ');
   Snap.findByIdAndUpdate(snapId, {
     $set: { seenBy },
-  }).then(() => {
-    const endText = seenBy.length === 5 ? ' and probably more people!' : '';
-    request.post(sendResponseUrl, {
-      json: { text: `Your SlapSnack was seen by ${usernames}${endText}` },
+  })
+    .then(() => {
+      const endText = seenBy.length === 5 ? ' and probably more people!' : '';
+      request.post(sendResponseUrl, {
+        json: { text: `Your SlapSnack was seen by ${usernames}${endText}` },
+      });
+    })
+    .catch((error) => {
+      request.post(sendResponseUrl, {
+        json: { text: error.message },
+      });
     });
-  }).catch((error) => {
-    request.post(sendResponseUrl, {
-      json: { text: error.message },
-    });
-  });
   //
   setTimeout(() => {
     request.post(responseUrl, {
@@ -106,11 +114,13 @@ const handleReadEvent = async (snapId, user, responseUrl) => {
   //
   return {
     text,
-    attachments: [{
-      fallback: text,
-      color,
-      image_url: imageUrl,
-    }],
+    attachments: [
+      {
+        fallback: text,
+        color,
+        image_url: imageUrl,
+      },
+    ],
   };
 };
 
@@ -119,13 +129,9 @@ module.exports = async (req, res) => {
   if (sslCheck) {
     return res.send('ssl_check');
   }
-  const {
-    token,
-    callback_id: snapId,
-    response_url: responseUrl,
-    user,
-    actions,
-  } = JSON.parse(payload);
+  const { token, callback_id: snapId, response_url: responseUrl, user, actions } = JSON.parse(
+    payload// eslint-disable-line comma-dangle
+  );
   if (token !== verificationToken) {
     return res.send('Wrong verification token');
   }

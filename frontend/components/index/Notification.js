@@ -77,6 +77,5 @@ Notification.propTypes = {
   message: PropTypes.string.isRequired,
   delay: PropTypes.number.isRequired,
 };
-/*animation: `4s ease ${delay}s ${animation}`,*/
 
 export default Notification;

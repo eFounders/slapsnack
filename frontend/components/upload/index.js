@@ -9,7 +9,7 @@ import Container from '../container';
 
 export default class extends Component {
   static propTypes = { snapId: PropTypes.string.isRequired };
-  state = { placeholderText: 'Loading...' };
+  state = { placeholderText: 'Loading…' };
   componentDidMount() {
     const panel = uploadcare.openPanel('#uploader-placeholder', null, {
       imagesOnly: true,
@@ -25,15 +25,17 @@ export default class extends Component {
             snapId: this.props.snapId,
             cdnUrl,
           }),
-        }).then(response => response.json()).then(({ ok }) => {
-          if (!ok) {
-            Router.push('/error');
-            return;
-          }
-          setTimeout(() => {
-            window.close();
-          }, 2 * 1000);
-        });
+        })
+          .then(response => response.json())
+          .then(({ ok }) => {
+            if (!ok) {
+              Router.push('/error');
+              return;
+            }
+            setTimeout(() => {
+              window.close();
+            }, 2 * 1000);
+          });
       });
     });
   }
