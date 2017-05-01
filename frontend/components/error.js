@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import Link from 'next/link';
-import Container from './container';
+import Container from './Container';
 
 const Error = ({ message }) => (
   <Container style={{ paddingBottom: 0, justifyContent: 'center' }}>

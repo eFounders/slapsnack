@@ -1,7 +1,7 @@
 import 'isomorphic-fetch';
 import Document, { Main, NextScript } from 'next/document';
 import Head from '../components/head';
-import Analytics from '../components/analytics';
+import Analytics from '../components/Analytics';
 
 export default class extends Document {
   render() {
