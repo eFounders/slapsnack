@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import Footer from './footer';
+import Footer from './Footer';
 
 const Container = ({ style, children }) => (
   <div style={style}>

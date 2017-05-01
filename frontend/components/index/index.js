@@ -1,7 +1,7 @@
-import Container from '../container';
-import Notification from './notification';
+import Container from '../Container';
+import Notification from './Notification';
 import AddToSlackButton from './add-to-slack-button';
-import Thumbnail from './thumbnail';
+import Thumbnail from './Thumbnail';
 
 export default () => (
   <Container>
