@@ -8,7 +8,6 @@
     "prettier": "prettier --print-width 100 --single-quote --trailing-comma es5 --write \"*.js\" \"{lib,models,routes}/**/*.js\"",
     "lt": "lt -p 8080 -s slapsnack",
     "dev": "NODE_ENV='development' nodemon",
-    "start": "node .",
     "deploy": "now --npm -E .env/production.env && now alias"
   },
   "dependencies": {
@@ -19,7 +18,7 @@
     "dotenv": "^4.0.0",
     "express": "^4.15.2",
     "lodash": "^4.17.4",
-    "mongoose": "^4.9.6",
+    "mongoose": "^4.9.7",
     "request": "^2.81.0",
     "request-promise": "^4.2.0"
   },
