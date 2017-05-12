@@ -61,8 +61,6 @@ module.exports = async (req, res) => {
   if (!teamId) {
     return res.send('Wrong team ID');
   }
-  const { bot } = await Team.findOne({ teamId });
-  const web = new WebClient(bot.bot_access_token);
   const words = text.split(' ').filter(word => word);
   if (words.length && words[0] === 'help') {
     return res.send(
@@ -84,6 +82,8 @@ module.exports = async (req, res) => {
   }
   const message = words.slice(index).join(' ');
   //
+  const { bot } = await Team.findOne({ teamId });
+  const web = new WebClient(bot.bot_access_token);
   const snap = new Snap({
     userId,
     recipients,

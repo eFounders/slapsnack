@@ -1,5 +1,6 @@
 {
   "name": "slapsnack-backend",
+  "public": true,
   "type": "npm",
   "alias": "backend.slapsnack.com",
   "engines": {
