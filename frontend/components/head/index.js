@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import { Head } from 'next/document';
 import random from 'lodash/random';
-//
+
 import { FRONTEND_URL } from '../../lib/env';
 import GlobalStyle from './global-style';
 import UploadcareScript from './uploadcare-script';

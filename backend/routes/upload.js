@@ -1,5 +1,5 @@
 const request = require('request-promise');
-//
+
 const Snap = require('../models/snap');
 const { color, sendActions } = require('../lib/constants');
 const analytics = require('../lib/analytics');

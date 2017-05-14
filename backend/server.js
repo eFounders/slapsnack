@@ -3,7 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
-//
+
 const router = require('./lib/router');
 
 mongoose.Promise = Promise;

@@ -1,7 +1,7 @@
 const { stringify } = require('querystring');
 const request = require('request-promise');
 const { WebClient } = require('@slack/client');
-//
+
 const Snap = require('../../models/snap');
 const { color } = require('../../lib/constants');
 const analytics = require('../../lib/analytics');
@@ -12,7 +12,6 @@ const handleMediaEvent = async (snapId, responseUrl) => {
   Snap.findByIdAndUpdate(snapId, {
     $set: { responseUrl },
   }).exec();
-  //
   const { message, memberIds } = await Snap.findById(snapId);
   if (!memberIds.length) {
     return { text: 'Wrong recipient! (see `/slapsnack help`)' };
@@ -37,14 +36,13 @@ const handleSendEvent = async (snapId, delay, user, responseUrl) => {
   Snap.findByIdAndUpdate(snapId, {
     $set: { delay, responseUrl },
   }).exec();
-  //
   const { bot, recipients, memberIds, teamId } = await Snap.findById(snapId);
   if (!memberIds.length) {
     return { text: 'Wrong recipient! (see `/slapsnack help`)' };
   }
   const web = new WebClient(bot.bot_access_token);
   const text = `Hey, ${user.name} just sent you a SlapSnack!`;
-  memberIds.forEach((memberId) => {
+  memberIds.forEach(memberId => {
     web.chat.postMessage(memberId, '', {
       as_user: true,
       attachments: [
@@ -82,7 +80,6 @@ const handleReadEvent = async (snapId, user, responseUrl) => {
     responseUrl: sendResponseUrl,
     teamId,
   } = await Snap.findById(snapId);
-  //
   seenBy.push(user.name);
   const usernames = seenBy.join(', ');
   Snap.findByIdAndUpdate(snapId, {
@@ -94,24 +91,21 @@ const handleReadEvent = async (snapId, user, responseUrl) => {
         json: { text: `Your SlapSnack was seen by ${usernames}${endText}` },
       });
     })
-    .catch((error) => {
+    .catch(error => {
       request.post(sendResponseUrl, {
         json: { text: error.message },
       });
     });
-  //
   setTimeout(() => {
     request.post(responseUrl, {
       json: { delete_original: true },
     });
   }, delay * 1000);
-  //
   analytics.track({
     userId: teamId,
     event: 'read',
     properties: { snapId },
   });
-  //
   return {
     text,
     attachments: [
@@ -130,7 +124,7 @@ module.exports = async (req, res) => {
     return res.send('ssl_check');
   }
   const { token, callback_id: snapId, response_url: responseUrl, user, actions } = JSON.parse(
-    payload// eslint-disable-line comma-dangle
+    payload
   );
   if (token !== verificationToken) {
     return res.send('Wrong verification token');

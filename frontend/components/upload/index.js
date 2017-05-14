@@ -3,7 +3,7 @@ import { Component } from 'react';
 import PropTypes from 'prop-types';
 import Router from 'next/router';
 import uploadcare from 'uploadcare-widget';
-//
+
 import { BACKEND_URL } from '../../lib/env';
 import Container from '../container';
 
@@ -15,7 +15,7 @@ export default class extends Component {
       imagesOnly: true,
       tabs: ['file', 'camera', 'url'],
     });
-    panel.done((file) => {
+    panel.done(file => {
       this.setState({ placeholderText: 'Uploading… you may now go back to Slack!' });
       file.done(({ cdnUrl }) => {
         fetch(`${BACKEND_URL}/upload`, {

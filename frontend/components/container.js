@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+
 import Footer from './footer';
 
 const Container = ({ style, children }) => (

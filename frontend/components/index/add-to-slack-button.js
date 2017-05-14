@@ -1,5 +1,5 @@
 import { stringify } from 'querystring';
-//
+
 import { SLACK_CLIENT_ID } from '../../lib/env';
 
 const queryString = stringify({

@@ -4,7 +4,7 @@ const findIndex = require('lodash/findIndex');
 const without = require('lodash/without');
 const request = require('request-promise');
 const { WebClient } = require('@slack/client');
-//
+
 const { color, sendActions } = require('../../lib/constants');
 const Team = require('../../models/team');
 const Snap = require('../../models/snap');
@@ -70,7 +70,7 @@ module.exports = async (req, res) => {
         "• `/slapsnack @alice It's a secret to everybody!`",
         '• `/slapsnack #general Am I really sure about this one?`',
         '• `/slapsnack @bob @charlie #random Hi there!`',
-      ].join('\n')// eslint-disable-line comma-dangle
+      ].join('\n')
     );
   }
   const isNotRecipient = word => !['@', '#'].includes(word.charAt(0));
@@ -81,7 +81,6 @@ module.exports = async (req, res) => {
     return res.send('You must specify at least one recipient! (see `/slapsnack help`)');
   }
   const message = words.slice(index).join(' ');
-  //
   const { bot } = await Team.findOne({ teamId });
   const web = new WebClient(bot.bot_access_token);
   const snap = new Snap({
@@ -96,14 +95,13 @@ module.exports = async (req, res) => {
     .then(memberIds =>
       Snap.findByIdAndUpdate(snapId, {
         $set: { memberIds },
-      })// eslint-disable-line comma-dangle
+      })
     )
-    .catch((error) => {
+    .catch(error => {
       request.post(responseUrl, {
         json: { text: error.message },
       });
     });
-  //
   analytics.track({
     userId: teamId,
     event: 'create',

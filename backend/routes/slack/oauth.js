@@ -1,5 +1,5 @@
 const { WebClient } = require('@slack/client');
-//
+
 const Team = require('../../models/team');
 const analytics = require('../../lib/analytics');
 
@@ -25,7 +25,7 @@ module.exports = async (req, res) => {
     {
       $set: { userId, teamId, teamName, bot },
     },
-    { upsert: true }// eslint-disable-line comma-dangle
+    { upsert: true }
   );
   if (!team) {
     analytics.identify({

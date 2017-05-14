@@ -1,5 +1,5 @@
 const express = require('express');
-//
+
 const slackCommandRoute = require('../routes/slack/command');
 const slackImRoute = require('../routes/slack/im');
 const slackOAuthRoute = require('../routes/slack/oauth');

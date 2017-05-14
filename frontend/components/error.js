@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import Link from 'next/link';
+
 import Container from './container';
 
 const Error = ({ message }) => (
