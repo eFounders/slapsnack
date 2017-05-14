@@ -4,6 +4,6 @@
   "type": "npm",
   "alias": ["slapsnack.com", "www.slapsnack.com", "snapslack.co", "www.snapslack.co"],
   "engines": {
-    "node": "7.9.0"
+    "node": "7.10.0"
   }
 }
