@@ -20,8 +20,6 @@ services:
     build: ./frontend
     volumes:
       - ./frontend:/opt/app
-    environment:
-      SHELL: /bin/bash
     entrypoint: ["yarn", "dev"]
     ports:
       - 3000:3000

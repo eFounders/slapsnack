@@ -6,13 +6,13 @@ import { FRONTEND_URL } from '../../lib/env';
 import GlobalStyle from './global-style';
 import UploadcareScript from './uploadcare-script';
 
+const title = 'A command for teams who want 👻 in Slack';
 const description = [
   'SlapSnack brings the fun of Snapchat to Slack.',
   'With the /slapsnack command you can send ephemeral content to individuals ' +
     'or groups through Slack.',
   'Life is more fun when you live in the moment!',
 ].join(' ');
-const title = 'A command for teams who want 👻 in Slack';
 const socialUrl = `${FRONTEND_URL}/static/img/social.jpg`;
 
 export default class extends Component {
@@ -48,7 +48,6 @@ export default class extends Component {
         {/* Twitter meta */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@efounders" />
-        <meta name="twitter:creator" content="@efounders" />
         <meta name="twitter:title" content={title} />
         <meta name="twitter:description" content={description} />
         <meta name="twitter:image" content={socialUrl} />

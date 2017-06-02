@@ -1,0 +1,6 @@
+{
+  "rules": [
+    { "pathname": "/api", "dest": "backend.slapsnack.com" },
+    { "dest": "www.slapsnack.com" }
+  ]
+}
