@@ -1,12 +1,12 @@
 {
   "name": "slapsnack-backend",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "license": "MIT",
   "scripts": {
     "eslint": "eslint .;exit 0",
     "prettier": "prettier --print-width 100 --single-quote --trailing-comma es5 --write \"*.js\" \"{lib,models,routes}/**/*.js\"",
     "lt": "lt -p 8080 -s slapsnack",
-    "dev": "NODE_ENV='development' nodemon",
+    "dev": "NODE_ENV='development' nodemon server.js",
     "deploy": "now -E .env/production.env && now alias"
   },
   "dependencies": {
@@ -17,17 +17,17 @@
     "dotenv": "^4.0.0",
     "express": "^4.15.3",
     "lodash": "^4.17.4",
-    "mongoose": "^4.10.4",
+    "mongoose": "^4.10.6",
     "request": "^2.81.0",
     "request-promise": "^4.2.1"
   },
   "devDependencies": {
     "eslint": "^3.19.0",
     "eslint-config-airbnb-base": "^11.2.0",
-    "eslint-config-prettier": "^2.1.1",
+    "eslint-config-prettier": "^2.2.0",
     "eslint-plugin-import": "^2.3.0",
-    "localtunnel": "^1.8.2",
+    "localtunnel": "^1.8.3",
     "nodemon": "^1.11.0",
-    "prettier": "^1.4.0"
+    "prettier": "^1.4.4"
   }
 }

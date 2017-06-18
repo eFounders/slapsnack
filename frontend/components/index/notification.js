@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-const Notification = ({ avatarUrl, name, time, message, delay }) => (
+const Notification = ({ avatarUrl, name, time, message, delay }) =>
   <div className="notification" style={{ animationDelay: `${delay}s` }}>
     <img className="avatar" src={avatarUrl} alt="avatar" />
     <div className="content">
@@ -68,8 +68,7 @@ const Notification = ({ avatarUrl, name, time, message, delay }) => (
         font-size: 14px;
       }
     `}</style>
-  </div>
-);
+  </div>;
 Notification.propTypes = {
   avatarUrl: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,

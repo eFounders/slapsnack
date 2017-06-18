@@ -10,8 +10,6 @@ const Team = require('../../models/team');
 const Snap = require('../../models/snap');
 const analytics = require('../../lib/analytics');
 
-const { SLACK_VERIFICATION_TOKEN: verificationToken } = process.env;
-
 const getUserFromUsername = async (web, username) => {
   const { members } = await web.users.list();
   return members.find(member => member.name === username);
@@ -55,7 +53,7 @@ const recipientsToMemberIds = async (web, recipients, userId) => {
 
 module.exports = async (req, res) => {
   const { token, team_id: teamId, user_id: userId, response_url: responseUrl, text } = req.body;
-  if (token !== verificationToken) {
+  if (token !== process.env.SLACK_VERIFICATION_TOKEN) {
     return res.send('Wrong verification token');
   }
   if (!teamId) {

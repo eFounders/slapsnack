@@ -9,6 +9,6 @@
     "www.snapslack.co"
   ],
   "engines": {
-    "node": "7.10.0"
+    "node": "8.1.2"
   }
 }

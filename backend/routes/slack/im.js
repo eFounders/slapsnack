@@ -6,8 +6,6 @@ const Snap = require('../../models/snap');
 const { color } = require('../../lib/constants');
 const analytics = require('../../lib/analytics');
 
-const { SLACK_VERIFICATION_TOKEN: verificationToken, FRONTEND_URL: frontendUrl } = process.env;
-
 const handleMediaEvent = async (snapId, responseUrl) => {
   Snap.findByIdAndUpdate(snapId, {
     $set: { responseUrl },
@@ -17,7 +15,7 @@ const handleMediaEvent = async (snapId, responseUrl) => {
     return { text: 'Wrong recipient! (see `/slapsnack help`)' };
   }
   const queryString = stringify({ id: snapId });
-  const url = `${frontendUrl}/upload?${queryString}`;
+  const url = `${process.env.FRONTEND_URL}/upload?${queryString}`;
   const text = `Follow this link to add a media:\n${url}`;
   return {
     text: message,
@@ -77,6 +75,7 @@ const handleReadEvent = async (snapId, user, responseUrl) => {
     delay,
     imageUrl,
     seenBy = [],
+    recipients,
     responseUrl: sendResponseUrl,
     teamId,
   } = await Snap.findById(snapId);
@@ -90,6 +89,9 @@ const handleReadEvent = async (snapId, user, responseUrl) => {
       request.post(sendResponseUrl, {
         json: { text: `Your SlapSnack was seen by ${usernames}${endText}` },
       });
+      if (seenBy.length === recipients.length) {
+        Snap.findByIdAndRemove(snapId).exec();
+      }
     })
     .catch(error => {
       request.post(sendResponseUrl, {
@@ -126,7 +128,7 @@ module.exports = async (req, res) => {
   const { token, callback_id: snapId, response_url: responseUrl, user, actions } = JSON.parse(
     payload
   );
-  if (token !== verificationToken) {
+  if (token !== process.env.SLACK_VERIFICATION_TOKEN) {
     return res.send('Wrong verification token');
   }
   const [{ name: event, value: delay }] = actions;

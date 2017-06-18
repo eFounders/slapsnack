@@ -11,7 +11,7 @@ const srcSet = {
   '2x': 'https://platform.slack-edge.com/img/add_to_slack@2x.png',
 };
 
-export default () => (
+export default () =>
   <a href={`https://slack.com/oauth/authorize?${queryString}`}>
     <img
       alt="Add to Slack"
@@ -20,5 +20,4 @@ export default () => (
       src={srcSet['1x']}
       srcSet={`${srcSet['1x']} 1x, ${srcSet['2x']} 2x`}
     />
-  </a>
-);
+  </a>;

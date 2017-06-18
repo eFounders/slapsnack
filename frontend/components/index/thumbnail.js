@@ -1,6 +1,7 @@
+/* eslint-disable jsx-a11y/media-has-caption */
 import PropTypes from 'prop-types';
 
-const Thumbnail = ({ src, children }) => (
+const Thumbnail = ({ src, children }) =>
   <div className="thumbnail">
     <video className="thumbnail-image" src={src} autoPlay loop />
     <p className="thumbnail-text">{children}</p>
@@ -22,8 +23,7 @@ const Thumbnail = ({ src, children }) => (
         border-radius: 8px;
       }
     `}</style>
-  </div>
-);
+  </div>;
 Thumbnail.propTypes = {
   src: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,

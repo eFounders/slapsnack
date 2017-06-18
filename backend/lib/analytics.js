@@ -1,5 +1,3 @@
 const Analytics = require('analytics-node');
 
-const { SEGMENT_WRITE_KEY: writeKey } = process.env;
-
-module.exports = new Analytics(writeKey, { flushAt: 20 });
+module.exports = new Analytics(process.env.SEGMENT_WRITE_KEY, { flushAt: 20 });
