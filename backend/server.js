@@ -13,8 +13,12 @@ const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cors());
-app.use(router);
+if (process.env.NODE_ENV === 'production') {
+  app.use('/api', router);
+} else {
+  app.use(router);
+  app.use(cors());
+}
 
 app.listen(process.env.PORT, () => {
   console.info(`SlapSnack listening on port ${process.env.PORT}!`);
