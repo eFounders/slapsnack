@@ -13,11 +13,11 @@ const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-if (process.env.NODE_ENV === 'production') {
-  app.use('/api', router);
-} else {
+if (process.env.NODE_ENV === 'development') {
   app.use(router);
   app.use(cors());
+} else {
+  app.use('/api', router);
 }
 
 app.listen(process.env.PORT, () => {
