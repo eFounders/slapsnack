@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-export default () =>
+export default () => (
   <div className="footer">
     <div className="footer-wrapper">
       <div className="footer-info">
@@ -13,7 +13,11 @@ export default () =>
         </div>
       </div>
       <span className="footer-credits">
-        Made with <span className="heart" role="img" aria-label="heart">❤️</span> by
+        Made with{' '}
+        <span className="heart" role="img" aria-label="heart">
+          ❤️
+        </span>{' '}
+        by
         <a href="https://twitter.com/efounders">@efounders</a>
       </span>
       <nav>
@@ -85,4 +89,5 @@ export default () =>
         }
       }
     `}</style>
-  </div>;
+  </div>
+);

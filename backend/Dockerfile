@@ -1,13 +1,13 @@
-FROM node:8.1.2-alpine
+FROM node:8.4.0-alpine
 MAINTAINER SlapSnack <slapsnack@e-founders.com>
 LABEL name="slapsnack-backend"
 
+RUN mkdir -p /opt/app
 WORKDIR /opt/app
 
 # Install packages using yarn
-COPY package.json yarn.lock /tmp/
-RUN cd /tmp && yarn
-RUN mkdir -p /opt/app && cd /opt/app && ln -s /tmp/node_modules
+COPY package.json yarn.lock /opt/app/
+RUN yarn
 
 COPY . /opt/app
 

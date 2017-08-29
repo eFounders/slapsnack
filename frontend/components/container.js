@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 
 import Footer from './footer';
 
-const Container = ({ style, children }) =>
+const Container = ({ style, children }) => (
   <div style={style}>
     {children}
     <Footer />
@@ -34,7 +34,8 @@ const Container = ({ style, children }) =>
         }
       }
     `}</style>
-  </div>;
+  </div>
+);
 Container.propTypes = {
   style: PropTypes.shape(),
   children: PropTypes.node.isRequired,

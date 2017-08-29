@@ -1,4 +1,4 @@
-FROM node:8.1.2-alpine
+FROM node:8.2.1-alpine
 MAINTAINER SlapSnack <slapsnack@e-founders.com>
 LABEL name="slapsnack-frontend"
 

@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 import Container from './container';
 
-const Error = ({ message }) =>
+const Error = ({ message }) => (
   <Container style={{ paddingBottom: 0, justifyContent: 'center' }}>
     <div>
       <h1>Whoops!</h1>
@@ -21,7 +21,8 @@ const Error = ({ message }) =>
         color: #f2f2f2;
       }
     `}</style>
-  </Container>;
+  </Container>
+);
 Error.propTypes = { message: PropTypes.string.isRequired };
 
 export default Error;

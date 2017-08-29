@@ -3,7 +3,7 @@ import Notification from './notification';
 import AddToSlackButton from './add-to-slack-button';
 import Thumbnail from './thumbnail';
 
-export default () =>
+export default () => (
   <Container>
     <Notification
       avatarUrl="/static/img/dwight@2x.png"
@@ -29,11 +29,16 @@ export default () =>
     <img className="item logo" src="/static/img/logo-header.svg" alt="logo" />
     <div className="item">
       <h1 className="title title-top">
-        Send snaps in Slack <span role="img" aria-label="ghost">👻</span>
+        Send snaps in Slack{' '}
+        <span role="img" aria-label="ghost">
+          👻
+        </span>
       </h1>
       <p className="description">
         Spice up your team’s life & go
-        <span className="description-emoji" role="img" aria-label="joy">😂</span>
+        <span className="description-emoji" role="img" aria-label="joy">
+          😂
+        </span>
         <span>by sending disappearing messages in Slack with the </span>
         <strong className="description-command">/slapsnack</strong>
         <span> command.</span>
@@ -43,18 +48,24 @@ export default () =>
       <AddToSlackButton />
     </div>
     <div className="item">
-      <h1 className="title">F**k Productivity! <span role="img" aria-label="fist">✊</span></h1>
+      <h1 className="title">
+        F**k Productivity!{' '}
+        <span role="img" aria-label="fist">
+          ✊
+        </span>
+      </h1>
       <p className="description">
         Life is more fun when you live in the moment{' '}
-        <span role="img" aria-label="sunglasses">😎</span>
+        <span role="img" aria-label="sunglasses">
+          😎
+        </span>
       </p>
     </div>
     <div className="item">
       <div className="thumbnails">
         <Thumbnail src="/static/img/gif1.mp4">
-          Just use <strong>/slapsnack</strong> to send useless messages,
-          pictures and gifs to your teammates.
-          They will disappear after a few seconds!
+          Just use <strong>/slapsnack</strong> to send useless messages, pictures and gifs to your
+          teammates. They will disappear after a few seconds!
         </Thumbnail>
         <Thumbnail src="/static/img/gif2.mp4">
           Don’t worry we won’t ever store or re-use your messages mostly because we don’t care.
@@ -117,4 +128,5 @@ export default () =>
         }
       }
     `}</style>
-  </Container>;
+  </Container>
+);
