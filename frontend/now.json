@@ -2,12 +2,8 @@
   "name": "slapsnack-frontend",
   "public": true,
   "type": "npm",
-  "alias": [
-    "www.slapsnack.com",
-    "snapslack.co",
-    "www.snapslack.co"
-  ],
+  "alias": "www.slapsnack.com",
   "engines": {
-    "node": "8.2.1"
+    "node": "8.4.0"
   }
 }

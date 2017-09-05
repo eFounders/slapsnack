@@ -126,7 +126,7 @@ module.exports = async (req, res) => {
     return res.send('ssl_check');
   }
   const { token, callback_id: snapId, response_url: responseUrl, user, actions } = JSON.parse(
-    payload
+    payload,
   );
   if (token !== process.env.SLACK_VERIFICATION_TOKEN) {
     return res.send('Wrong verification token');

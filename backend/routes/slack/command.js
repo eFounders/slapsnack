@@ -68,7 +68,7 @@ module.exports = async (req, res) => {
         "• `/slapsnack @alice It's a secret to everybody!`",
         '• `/slapsnack #general Am I really sure about this one?`',
         '• `/slapsnack @bob @charlie #random Hi there!`',
-      ].join('\n')
+      ].join('\n'),
     );
   }
   const isNotRecipient = word => !['@', '#'].includes(word.charAt(0));
@@ -93,7 +93,7 @@ module.exports = async (req, res) => {
     .then(memberIds =>
       Snap.findByIdAndUpdate(snapId, {
         $set: { memberIds },
-      })
+      }),
     )
     .catch(error => {
       request.post(responseUrl, {

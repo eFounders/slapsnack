@@ -16,14 +16,14 @@ module.exports = async (req, res) => {
   } = await new WebClient().oauth.access(
     process.env.SLACK_CLIENT_ID,
     process.env.SLACK_CLIENT_SECRET,
-    code
+    code,
   );
   const team = await Team.findOneAndUpdate(
     { teamId },
     {
       $set: { userId, teamId, teamName, bot },
     },
-    { upsert: true }
+    { upsert: true },
   );
   if (!team) {
     analytics.identify({
