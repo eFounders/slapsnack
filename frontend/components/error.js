@@ -9,7 +9,7 @@ const Error = ({ message }) => (
       <h1>Whoops!</h1>
       <p>{message}</p>
       <Link href="/">
-        <a href="/">Get me back to SlapSnack!</a>
+        <a>Get me back to SlapSnack!</a>
       </Link>
     </div>
     <style jsx>{`
