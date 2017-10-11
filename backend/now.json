@@ -4,6 +4,6 @@
   "type": "npm",
   "alias": "backend.slapsnack.com",
   "engines": {
-    "node": "8.4.0"
+    "node": "8.6.0"
   }
 }

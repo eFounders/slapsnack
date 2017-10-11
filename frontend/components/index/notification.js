@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 
 const Notification = ({ avatarUrl, name, time, message, delay }) => (
-  <div className="notification" style={{ animationDelay: `${delay}s` }}>
+  <div className="notification">
     <img className="avatar" src={avatarUrl} alt="avatar" />
     <div className="content">
       <div className="title">
@@ -37,7 +37,7 @@ const Notification = ({ avatarUrl, name, time, message, delay }) => (
         padding: 10px;
         border-radius: 4px;
         display: flex;
-        animation: notification-animation 4s ease;
+        animation: notification-animation 4s ease ${delay}s;
         visibility: hidden;
       }
       .avatar {

@@ -1,4 +1,3 @@
-/* global fetch */
 import { Component } from 'react';
 import PropTypes from 'prop-types';
 import Router from 'next/router';
@@ -29,7 +28,7 @@ export default class extends Component {
           .then(response => response.json())
           .then(({ ok }) => {
             if (!ok) {
-              Router.push('/error');
+              Router.replace('/error');
               return;
             }
             setTimeout(() => {
@@ -41,7 +40,7 @@ export default class extends Component {
   }
   render() {
     return (
-      <Container style={{ paddingBottom: 0, justifyContent: 'center' }}>
+      <Container className="vertically-centered">
         <div className="uploader-container">
           <div id="uploader-placeholder" className="placeholder">
             <h1>{this.state.placeholderText}</h1>

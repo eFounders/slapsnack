@@ -4,12 +4,12 @@ import Link from 'next/link';
 import Container from './container';
 
 const Error = ({ message }) => (
-  <Container style={{ paddingBottom: 0, justifyContent: 'center' }}>
+  <Container className="vertically-centered">
     <div>
       <h1>Whoops!</h1>
       <p>{message}</p>
       <Link href="/">
-        <a>Get me back to SlapSnack!</a>
+        <a href="/">Get me back to SlapSnack!</a>
       </Link>
     </div>
     <style jsx>{`

@@ -1,9 +1,5 @@
 {
   "name": "slapsnack-frontend",
   "public": true,
-  "type": "npm",
-  "alias": "www.slapsnack.com",
-  "engines": {
-    "node": "8.4.0"
-  }
+  "alias": "www.slapsnack.com"
 }

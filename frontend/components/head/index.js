@@ -1,18 +1,16 @@
 import { Component } from 'react';
 import { Head } from 'next/document';
-import random from 'lodash/random';
+import sample from 'lodash/sample';
 
 import { FRONTEND_URL } from '../../lib/env';
 import GlobalStyle from './global-style';
 import UploadcareScript from './uploadcare-script';
 
 const title = 'A command for teams who want 👻 in Slack';
-const description = [
-  'SlapSnack brings the fun of Snapchat to Slack.',
-  'With the /slapsnack command you can send ephemeral content to individuals ' +
-    'or groups through Slack.',
-  'Life is more fun when you live in the moment!',
-].join(' ');
+const description =
+  'SlapSnack brings the fun of Snapchat to Slack. With the /slapsnack command you can send ' +
+  'ephemeral content to individuals or groups through Slack. Life is more fun when you live in ' +
+  'the moment!';
 const socialUrl = `${FRONTEND_URL}/static/img/social.jpg`;
 
 export default class extends Component {
@@ -23,7 +21,7 @@ export default class extends Component {
   // random emoji code courtesy of @ababol
   changeTitle = () => {
     const emojis = ['🍑', '🌵', '🐷', '🌭', '🍒', '🍩', '🍭', '🐍', '🐙', '😙', '🐱', '🍆'];
-    const randomEmoji = emojis[random(0, emojis.length - 1)];
+    const randomEmoji = sample(emojis);
     this.setState({ title: `SlapSnack ${randomEmoji}` });
   };
   render() {

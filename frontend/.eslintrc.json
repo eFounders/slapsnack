@@ -10,6 +10,8 @@
   },
   "rules": {
     "react/jsx-filename-extension": ["error", { "extensions": [".js", ".jsx"] }],
-    "react/react-in-jsx-scope": ["off"]
+    "react/react-in-jsx-scope": ["off"],
+    "react/jsx-curly-brace-presence": ["off"],
+    "react/no-typos": ["off"]
   }
 }

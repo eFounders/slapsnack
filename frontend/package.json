@@ -9,27 +9,32 @@
     "prettier": "prettier --write \"{components,lib,pages}/**/*.js\"",
     "dev": "next",
     "build": "next build",
-    "start": "next start",
-    "deploy": "now && now alias",
+    "preexport": "npm run build",
+    "export": "next export",
+    "prestart": "npm run export",
+    "start": "serve out",
+    "predeploy": "npm run export && cp now.json out",
+    "deploy": "cd out && now && now alias",
     "cleanup": "now rm slapsnack-frontend --safe -y"
   },
   "dependencies": {
     "isomorphic-fetch": "^2.2.1",
     "lodash": "^4.17.4",
-    "next": "^3.2.1",
-    "prop-types": "^15.5.10",
-    "react": "^15.6.1",
-    "react-dom": "^15.6.1",
-    "uploadcare-widget": "^3.1.2"
+    "next": "^4.0.3",
+    "prop-types": "^15.6.0",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
+    "serve": "^6.2.0",
+    "uploadcare-widget": "^3.1.4"
   },
   "devDependencies": {
-    "babel-eslint": "^7.2.3",
-    "eslint": "^4.6.1",
-    "eslint-config-airbnb": "^15.1.0",
-    "eslint-config-prettier": "^2.4.0",
+    "babel-eslint": "^8.0.1",
+    "eslint": "^4.8.0",
+    "eslint-config-airbnb": "^16.0.0",
+    "eslint-config-prettier": "^2.6.0",
     "eslint-plugin-import": "^2.7.0",
-    "eslint-plugin-jsx-a11y": "^5.1.0",
-    "eslint-plugin-react": "^7.3.0",
-    "prettier": "^1.6.1"
+    "eslint-plugin-jsx-a11y": "^6.0.2",
+    "eslint-plugin-react": "^7.4.0",
+    "prettier": "^1.7.4"
   }
 }

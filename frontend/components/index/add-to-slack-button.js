@@ -3,7 +3,7 @@ import { stringify } from 'querystring';
 import { SLACK_CLIENT_ID } from '../../lib/env';
 
 const queryString = stringify({
-  scope: 'commands,bot,users:read,channels:read,chat:write:bot',
+  scope: ['commands', 'bot', 'users:read', 'channels:read', 'chat:write:bot'].join(','),
   client_id: SLACK_CLIENT_ID,
 });
 const srcSet = {
